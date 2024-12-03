@@ -22,9 +22,28 @@ public class App extends Application {
         // Left Pane, contiene il titolo e il form per aggiungere nuovi task.
         VBox leftPane = new VBox();
         leftPane.setId("left-pane");
+
         // TODO aggiungere il titolo e i pulsanti
+        final Label lblLeftPane = new Label("Todo App");
+        final TextField textInput = new TextField();
+        final Button addButton = new Button("Add");
+
         // Aggiungo i nodi al leftPane
+        leftPane.getChildren().addAll(lblLeftPane, textInput, addButton);
+        leftPane.setAlignment(Pos.TOP_CENTER);
+
         VBox rightPane = new VBox();
+        final Label lblRightPane = new Label("Tasks");
+        rightPane.setAlignment(Pos.TOP_CENTER);
+
+        final HBox taskBox = new HBox();
+        final Label lblTasksTodo = new Label("Todo");
+        final Label lblTasksDone = new Label("Done");
+        taskBox.getChildren().addAll(lblTasksTodo, lblTasksDone);
+        HBox.setHgrow(lblTasksTodo, Priority.ALWAYS);
+        HBox.setHgrow(lblTasksDone, Priority.ALWAYS);
+        rightPane.getChildren().addAll(lblRightPane, taskBox);
+
          // Imposto i pannelli sinistro e centrale come figli del root.
         root.setLeft(leftPane);
         root.setCenter(rightPane);
