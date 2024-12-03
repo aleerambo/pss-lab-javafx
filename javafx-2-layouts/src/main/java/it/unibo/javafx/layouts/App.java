@@ -19,6 +19,7 @@ public class App extends Application {
         // Il root è un BorderPane, che divide la finestra in 5 aree: top, bottom, left, right, center.
         // Noi usiamo solo left e center.
         BorderPane root = new BorderPane();
+
         // Left Pane, contiene il titolo e il form per aggiungere nuovi task.
         VBox leftPane = new VBox();
         leftPane.setId("left-pane");
@@ -27,24 +28,45 @@ public class App extends Application {
         final Label lblLeftPane = new Label("Todo App");
         final TextField textInput = new TextField();
         final Button addButton = new Button("Add");
+        addButton.setOnAction(event -> {
+            Node newTask = createTaskSection(textInput.getText().trim());
+
+            // Aggiungi il nuovo task alla sezione Todo
+            tasksTodo.getChildren().add(newTask);
+
+            // Svuota il campo di testo dopo l'inserimento
+            textInput.clear();
+        });
 
         // Aggiungo i nodi al leftPane
         leftPane.getChildren().addAll(lblLeftPane, textInput, addButton);
         leftPane.setAlignment(Pos.TOP_CENTER);
 
         VBox rightPane = new VBox();
+        rightPane.setId("right-pane");
         final Label lblRightPane = new Label("Tasks");
         rightPane.setAlignment(Pos.TOP_CENTER);
 
         final HBox taskBox = new HBox();
+        VBox.setVgrow(taskBox, Priority.ALWAYS);
+        taskBox.setId("tasks-area");
+
+        VBox tasksTodo = new VBox();
+        tasksTodo.setAlignment(Pos.TOP_CENTER);
+        VBox tasksDone = new VBox();
+        tasksDone.setAlignment(Pos.TOP_CENTER);
         final Label lblTasksTodo = new Label("Todo");
         final Label lblTasksDone = new Label("Done");
-        taskBox.getChildren().addAll(lblTasksTodo, lblTasksDone);
-        HBox.setHgrow(lblTasksTodo, Priority.ALWAYS);
-        HBox.setHgrow(lblTasksDone, Priority.ALWAYS);
+        tasksTodo.getChildren().add(lblTasksTodo);
+        tasksDone.getChildren().add(lblTasksDone);
+
+        HBox.setHgrow(tasksTodo, Priority.ALWAYS);
+        HBox.setHgrow(tasksDone, Priority.ALWAYS);
+        taskBox.getChildren().addAll(tasksTodo, tasksDone);
+
         rightPane.getChildren().addAll(lblRightPane, taskBox);
 
-         // Imposto i pannelli sinistro e centrale come figli del root.
+        // Imposto i pannelli sinistro e centrale come figli del root.
         root.setLeft(leftPane);
         root.setCenter(rightPane);
 
@@ -63,6 +85,13 @@ public class App extends Application {
 
     // Crea un todo composto da una label e un bottone per segnare il task come completato.
     public static Node createTaskSection(String content) {
-        throw new UnsupportedOperationException("TODO");
+        final HBox task = new HBox();
+        Label taskLabel = new Label(content);
+        VBox textBox = new VBox(taskLabel);
+        Button doneButton = new Button("X");
+        doneButton.setOnAction(e -> ((VBox) task.getParent()).getChildren().remove(task));
+        HBox.setHgrow(textBox, Priority.ALWAYS);
+        task.getChildren().addAll(textBox, doneButton);
+        return task;
     }
 }
