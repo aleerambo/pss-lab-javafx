@@ -12,9 +12,15 @@ public class App extends Application {
     @Override
     public void start(final Stage primaryStage) throws Exception {
         primaryStage.setTitle("Controls Exercise!");
+
+        // Layout principale
         final VBox mainPane = new VBox();
+
         final Counter counter = new Counter();
+
         // TODO aggiungere gli elementi come descritto da readme
+
+        // Label per visualizzare il valore del contatore
         final Label lbl = new Label();
         lbl.textProperty().bind(counter.counterProperty().asString());
         
@@ -26,11 +32,14 @@ public class App extends Application {
         btnMinus.setMinWidth(100);
         btnMinus.setOnAction(event -> counter.decrement());
         
+        // Layout orizzontale per i pulsanti
         final HBox buttonBox  = new HBox();
         buttonBox.getChildren().addAll(btnPlus, btnMinus);
 
+        // Aggiungere elementi al layout principale
         mainPane.getChildren().addAll(lbl, buttonBox);
         
+        // Configurazione della scena e visualizzazione
         primaryStage.setScene(new Scene(mainPane));
         primaryStage.show();
     }
