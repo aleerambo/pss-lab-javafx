@@ -23,8 +23,8 @@ public interface TodoApp {
      * Returns the list of todos.
      * @return the list of todos
      */
-
     List<Todo> getTodos();
+    
     /** Returns the list of completed todos.
      * @return the list of completed todos
      */
