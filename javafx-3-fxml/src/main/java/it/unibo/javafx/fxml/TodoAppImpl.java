@@ -36,7 +36,8 @@ public class TodoAppImpl implements TodoAppObservable  {
     // usa remove per eliminare un todo dalla lista dei todos e aggiungerlo alla lista dei completedTodos
     @Override
     public void completeTodo(Todo todo) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        this.todos.remove(todo);
+        this.completedTodos.add(todo);
     }
 
     @Override
