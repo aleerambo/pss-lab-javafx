@@ -33,6 +33,9 @@ public class TodoAppHandler {
     @FXML
     public final void addTodo(final MouseEvent evt) {
         // aggiungi un nuovo todo solo se il testo non e vuoto
+        if(!todoText.getText().isEmpty()) {
+            model.addNewTodo(todoText.getText());
+        }
     }
 
     // Aggiornamento dei todos, vengono tolti tutti quelli presenti e aggiunti quelli nuovi
