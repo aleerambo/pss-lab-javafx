@@ -9,7 +9,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Controller for the `JavaFXAppWithFXML` application.
