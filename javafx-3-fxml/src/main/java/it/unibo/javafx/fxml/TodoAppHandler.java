@@ -46,7 +46,8 @@ public class TodoAppHandler {
 
     // Aggiornamento dei completedTodos, vengono tolti tutti quelli presenti e aggiunti quelli nuovi
     private void updateDone(List<Todo> todos) {
-        // Simile a quello di prima
+        tasksDone.getChildren().clear();
+        todos.forEach(this::insertCompleted);
     }
 
     // Inserisce un nuovo todo nella lista dei todos
