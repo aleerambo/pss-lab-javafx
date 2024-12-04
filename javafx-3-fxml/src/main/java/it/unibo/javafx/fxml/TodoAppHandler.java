@@ -69,5 +69,8 @@ public class TodoAppHandler {
     private void insertCompleted(Todo todo) {
         var todoGraphic = new HBox();
         // TODO
+        final Label todoText = new Label(todo.getContent());
+        todoGraphic.getChildren().add(todoText);
+        tasksDone.getChildren().add(todoGraphic);
     }
 }
